@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+   <meta charset="UTF-8">
+   <title>第1回 レポート</title>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/99/three.min.js"></script>
+  </head>
+  
+  <body>
+    <script>
+      var init=function(){
+      var renderer=new THREE.WebGLRenderer();
+      renderer.setSize(800,600);
+      document.body.appendChild(renderer.domElement);
+      var scene=new THREE.Scene();
+      var camera=new THREE.PerspectiveCamera(45,800/600,1,10000);
+      var cg=new THREE.ConeGeometry(1.5,0.5,4);
+      var cm=new THREE.MeshPhongMaterial({color:0x00ffff});
+      var cone=new THREE.Mesh(cg,cm);
+      cone.position.set(-3,0,-10);
+      scene.add(cone);
+      var bg=new THREE.BoxGeometry(2,2,2);
+      var bm=new THREE.MeshLambertMaterial({color:0xff00ff});
+      var hako=new THREE.Mesh(bg,bm);
+      hako.position.set(1,0,-1);
+      scene.add(hako);
+      var sg=new THREE.SphereGeometry(5,32,32);
+      var sm=new THREE.MeshBasicMaterial({color:0x99dd33,wireframe:true});
+      var kyu=new THREE.Mesh(sg,sm);
+      kyu.position.set(-10,0,-20);
+      scene.add(kyu);
+      var tg=new THREE.TorusGeometry(30,15,10,10);
+      var tm=new THREE.MeshToonMaterial({color:0xdd8822});
+      var donuts=new THREE.Mesh(tg,tm);
+      donuts.position.set(0,0,-100);
+      scene.add(donuts);
+      var directionalLight=new THREE.DirectionalLight(0xffffff);
+      directionalLight.position.set(10,20,30);
+      scene.add(directionalLight);
+      var velocity=0.002;
+      var update=function(){
+      requestAnimationFrame(update);
+      cone.rotation.z-=velocity;
+      hako.rotation.x+=0.01;
+      hako.rotation.z+=0.01;
+      hako.position.z-=0.01;
+      donuts.position.z=(donuts.position.z<0.0)?(donuts.position.z+0.05):(kune.position.z+0.0005);
+      if(kyu.position.x<=10.0){
+        kyu.position.x+=0.01;
+        kyu.rotation.x+=0.01;
+     }else{
+        kyu.position.z-=0.01;
+        kyu.rotation.z-=0.01;
+        }
+      renderer.render(scene,camera);
+      };
+      
+    update();
+    }
+     window.addEventListener('DOMContentLoaded',init);
+    </script>
+  </body>
+</html>
