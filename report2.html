@@ -16,38 +16,38 @@
      var scene=new THREE.Scene();
      var camera=new THREE.PerspectiveCamera(45,800/600,1,10000);
      
-     var loader=new THREE.TextureLoader();
-     var groundtexture=loader.load("stone.jpg");
-     var groundmaterial=new THREE.MeshLambertMaterial({map:groundtexture});
      
      var plane=new THREE.PlaneGeometry(100,100,1,1);
+     var loader1=new THREE.TextureLoader();
+     var groundtexture=loader1.load("stone.jpg");
+     var groundmaterial=new THREE.MeshLambertMaterial({map:groundtexture});
      var ground=new THREE.Mesh(plane,groundmaterial);
      ground.position.set(0,-30,-150);
      ground.rotation.x=(3*Math.PI)/2;
      scene.add(ground);
      
-     var rooftexture=loader.load("cit.png");
-     var roofmaterial=new THREE.MeshLambertMaterial({map:rooftexture});
-     
      
      var roofgeometry=new THREE.CylinderGeometry(5,5,5,3);
+     var loader2=new THREE.TextureLoader();
+     var rooftexture=loader2.load("cit.png");
+     var roofmaterial=new THREE.MeshLambertMaterial({map:rooftexture});
      var roof=new THREE.Mesh(roofgeometry,roofmaterial);
      roof.position.set(0,0,0);
      roof.rotation.x=(3*Math.PI)/2;
      scene.add(roof);
-     
-     
-     var buildingtexture=loader.load("imgb1.jpg");
-     var bulidingmaterial=new THREE.MeshLambertMaterial({map:buildingtexture});
-     
+    
     
      var buildingwidth=(2*5.0);
+     
      var buildinggeometry=new THREE.BoxGeometry(buildingwidth,20,5);
+     var loader3=new THREE.TextureLoader();
+     var buildingtexture=loader3.load("imgb1.jpg");
+     var buildingmaterial=new THREE.MeshLambertMaterial({map:buildingtexture});
      var building=new THREE.Mesh(buildinggeometry,buildingmaterial);
-     building.position.set(0,-12,0);
+     building.position.set(0,-12.5,0);
      scene.add(building);
      
-     var cit=new THREE.Group();
+     const cit=new THREE.Group();
      cit.add(roof);
      cit.add(building);
      cit.position.set(0,10,-150);
