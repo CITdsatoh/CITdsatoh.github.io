@@ -30,6 +30,7 @@
      var rooftexture=loader2.load("cit.png");
      var roofmaterial=new THREE.MeshLambertMaterial({map: rooftexture});
      
+     
      var roofgeometry=new THREE.CylinderGeometry(5,5,5,3);
      var roof=new THREE.Mesh(roofgeometry,roofmaterial);
      roof.position.set(0,0,0);
@@ -38,10 +39,11 @@
      
      var loader3=new THREE.TextureLoader();
      var buildingtexture=loader3.load("imgb1.jpg");
-     var buildingmaterial=new THREE.MeshLambertMaterial({map: buildingtexture});
+     var bulidingmaterial=new THREE.MeshLambertMaterial({map: buildingtexture});
+     
     
      var buildingwidth=(2*5.0);
-     var buildinggeometry=new THREE.BoxGeometry(buildwidth,20,5);
+     var buildinggeometry=new THREE.BoxGeometry(buildingwidth,20,5);
      var building=new THREE.Mesh(buildinggeometry,buildingmaterial);
      building.position.set(0,-12.5,0);
      scene.add(building);
