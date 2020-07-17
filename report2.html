@@ -31,7 +31,6 @@
      var roofmaterial=new THREE.MeshLambertMaterial({map: rooftexture});
      
      var roofgeometry=new THREE.CylinderGeometry(5,5,5,3);
-     //var roofmaterial=new THREE.MeshLambertMaterial({color:0xff0000});
      var roof=new THREE.Mesh(roofgeometry,roofmaterial);
      roof.position.set(0,0,0);
      roof.rotation.x=(3*Math.PI)/2;
@@ -42,7 +41,6 @@
      var buildingmaterial=new THREE.MeshLambertMaterial({map: buildingtexture});
      var buildingwidth=(2*5.0);
      var buildinggeometry=new THREE.BoxGeometry(buildwidth,20,5);
-     //var buildingmaterial=new THREE.MeshLambertMaterial({color:0x0000ff});
      var building=new THREE.Mesh(buildinggeometry,buildingmaterial);
      building.position.set(0,-12.5,0);
      scene.add(building);
