@@ -21,22 +21,54 @@
      var groundmaterial=new THREE.MeshLambertMaterial({map: groundtexture});
      
      var plane=new THREE.PlaneGeometry(100,100,1,1);
-     //var planematerial=new THREE.MeshLambertMaterial({color:0xffff00});
      var ground=new THREE.Mesh(plane,groundmaterial);
      ground.position.set(0,-30,-150);
      ground.rotation.x=(3*Math.PI)/2;
      scene.add(ground);
      
      
-     var directionalLight=new THREE.DirectionalLight(0xffffff);
-     directionalLight.position.set(1,1,1);
-     directionalLight.castShadow=true;
-     scene.add(directionalLight);
+     var rooftexture=loader.load("cit.png");
+     var roofmaterial=new THREE.MeshLambertMaterial({map: roodtexture});
      
+     var roofgeometry=new THREE.CylinderGeometry(5,5,5,3);
+     //var roofmaterial=new THREE.MeshLambertMaterial({color:0xff0000});
+     var roof=new THREE.Mesh(roofgeometry,roofmaterial);
+     roof.position.set(0,0,0);
+     roof.rotation.x=(3*Math.PI)/2;
+     scene.add(roof);
+     
+     
+     var buildingtexture=loader.load("imgb1.jpg");
+     var buildingmaterial=new THREE.MeshLambertMaterial({map: buildingtexture});
+     var buildingwidth=(2*5.0);
+     var buildinggeometry=new THREE.BoxGeometry(buildwidth,20,5);
+     //var buildingmaterial=new THREE.MeshLambertMaterial({color:0x0000ff});
+     var building=new THREE.Mesh(buildinggeometry,buildingmaterial);
+     building.position.set(0,-12.5,0);
+     scene.add(building);
+     
+     const cit=new THREE.Group();
+     cit.add(roof);
+     cit.add(building);
+     cit.position.set(0,10,-150);
+     scene.add(cit);
+
+     
+     
+     var directionalLight1=new THREE.DirectionalLight(0xffffff);
+     directionalLight1.position.set(1,1,1);
+     directionalLight1.castShadow=true;
+     scene.add(directionalLight1);
+     
+     var directionalLight2=new THREE.DirectionalLight(0xffffff);
+     directionalLight2.position.set(-1,-1,1);
+     directionalLight2.castShadow=true;
+     scene.add(directionalLight2);
      
      renderer.render(scene,camera);
      var update=function(){
       requestAnimationFrame(update);
+      cit.rotation.y+=0.001;
       renderer.render(scene,camera);
      };
      update();
