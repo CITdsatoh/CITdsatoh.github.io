@@ -19,7 +19,7 @@
      
      var plane=new THREE.PlaneGeometry(100,100,1,1);
      var loader=new THREE.TextureLoader();
-     var groundtexture=loader1.load("stone.jpg");
+     var groundtexture=loader.load("stone.jpg");
      var groundmaterial=new THREE.MeshLambertMaterial({map:groundtexture});
      var ground=new THREE.Mesh(plane,groundmaterial);
      ground.position.set(0,-30,-150);
