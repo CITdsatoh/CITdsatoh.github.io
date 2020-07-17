@@ -50,7 +50,7 @@
      const cit=new THREE.Group();
      cit.add(roof);
      cit.add(building);
-     cit.position.set(0,10,-150);
+     cit.position.set(0,-30,-150);
      scene.add(cit);
     
      
@@ -68,7 +68,7 @@
      renderer.render(scene,camera);
      var update=function(){
       requestAnimationFrame(update);
-     //cit.rotation.y+=0.001;
+     cit.rotation.y+=0.001;
       renderer.render(scene,camera);
      };
      update();
