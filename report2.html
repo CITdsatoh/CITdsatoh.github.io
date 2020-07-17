@@ -39,6 +39,7 @@
      var loader3=new THREE.TextureLoader();
      var buildingtexture=loader3.load("imgb1.jpg");
      var buildingmaterial=new THREE.MeshLambertMaterial({map: buildingtexture});
+    
      var buildingwidth=(2*5.0);
      var buildinggeometry=new THREE.BoxGeometry(buildwidth,20,5);
      var building=new THREE.Mesh(buildinggeometry,buildingmaterial);
