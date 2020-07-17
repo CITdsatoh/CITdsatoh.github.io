@@ -18,7 +18,7 @@
      
      var loader1=new THREE.TextureLoader();
      var groundtexture=loader1.load("stone.jpg");
-     var groundmaterial=new THREE.MeshLambertMaterial({map: groundtexture});
+     var groundmaterial=new THREE.MeshLambertMaterial({map:groundtexture});
      
      var plane=new THREE.PlaneGeometry(100,100,1,1);
      var ground=new THREE.Mesh(plane,groundmaterial);
@@ -28,7 +28,7 @@
      
      var loader2=new THREE.TextureLoader();
      var rooftexture=loader2.load("cit.png");
-     var roofmaterial=new THREE.MeshLambertMaterial({map: rooftexture});
+     var roofmaterial=new THREE.MeshLambertMaterial({map:rooftexture});
      
      
      var roofgeometry=new THREE.CylinderGeometry(5,5,5,3);
@@ -39,7 +39,7 @@
      
      var loader3=new THREE.TextureLoader();
      var buildingtexture=loader3.load("imgb1.jpg");
-     var bulidingmaterial=new THREE.MeshLambertMaterial({map: buildingtexture});
+     var bulidingmaterial=new THREE.MeshLambertMaterial({map:buildingtexture});
      
     
      var buildingwidth=(2*5.0);
