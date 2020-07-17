@@ -26,10 +26,10 @@
      ground.rotation.x=(3*Math.PI)/2;
      scene.add(ground);
      
-     /*var loader2=new THREE.TextureLoader();
+     var loader2=new THREE.TextureLoader();
      var rooftexture=loader2.load("cit.png");
      var roofmaterial=new THREE.MeshLambertMaterial({map: rooftexture});
-     */
+     
      
      var roofgeometry=new THREE.CylinderGeometry(5,5,5,3);
      var roof=new THREE.Mesh(roofgeometry,roofmaterial);
@@ -48,12 +48,12 @@
      building.position.set(0,-12.5,0);
      scene.add(building);
      
-     const cit=new THREE.Group();
+     var cit=new THREE.Group();
      cit.add(roof);
      cit.add(building);
      cit.position.set(0,10,-150);
      scene.add(cit);
-
+    
      
      
      var directionalLight1=new THREE.DirectionalLight(0xffffff);
@@ -69,7 +69,7 @@
      renderer.render(scene,camera);
      var update=function(){
       requestAnimationFrame(update);
-      cit.rotation.y+=0.001;
+     cit.rotation.y+=0.001;
       renderer.render(scene,camera);
      };
      update();
