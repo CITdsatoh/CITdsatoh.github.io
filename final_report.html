@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/110/three.min.js"></script>
+    <script src="OrbitControls.js"></script>
+    <title>最終レポート</title>
+    <script>
+    
+      window.addEventListener('load', init);
+
+      function init() {
+        
+        const width = 960;
+        const height = 540;
+        const renderer = new THREE.WebGLRenderer({
+          canvas: document.querySelector('#myCanvas')
+        });
+        renderer.setSize(width, height);
+
+        const scene = new THREE.Scene();
+
+        const camera = new THREE.PerspectiveCamera(45, width / height);
+        camera.position.set(0, 0, 0);
+        
+       const controls = new THREE.OrbitControls(camera);
+       controls.autoRotate = true;
+        
+      
+
+        var textureLoader = new THREE.TextureLoader();
+        var suntexture = textureLoader.load("sun.png");
+        var startexture = textureLoader.load("star.png");
+        
+        
+        var treegeometry=new THREE.PlaneGeometry(10,10);
+        var treemat=new THREE.MeshPhongMaterial({color:0xff00ff});
+        var tree=new THREE.Mesh(treegeometry,treemat);
+        tree.position.set(0,0,-20);
+        scene.add(tree);
+
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
+        scene.add(ambientLight);
+
+        var directionalLight1 = new THREE.DirectionalLight(0xffffff,0.5);
+        directionalLight1.position.set(0, 0, 10);
+        scene.add(directionalLight1);
+        
+
+        tick();
+
+        function tick() {
+          renderer.render(scene, camera);
+          requestAnimationFrame(tick);
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <canvas id="myCanvas"></canvas>
+  </body>
+</html>
