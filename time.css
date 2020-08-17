@@ -1,0 +1,44 @@
+@charset "UTF-8";
+
+table
+{
+   border-collapse:collapse;
+   border:10px solid #000000;
+   margin-top:10px;
+   margin-bottom:100px;
+   margin-left:20px;
+   margin-right:20px;
+}
+caption
+{
+   text-align:center;
+}
+
+
+th,td
+{
+   width:200px;
+   height:100px;
+   border:2px solid #000000;
+}
+th p
+{
+   font-family:"Ms Pmincho";
+   text-align:center;
+}
+
+th p.sub
+{
+    font-weight:bold;
+}
+
+tbody tr:first-child  td:nth-child(odd),tbody tr:nth-child(n+2) td:nth-child(even)
+{
+   border-left:5px solid #000000;
+}
+
+
+thead,tbody
+{
+    border:7px solid #000000;
+}
