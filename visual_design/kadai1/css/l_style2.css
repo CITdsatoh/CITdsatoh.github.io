@@ -1,0 +1,22 @@
+@charset "UTF-8";
+
+h2
+{
+   padding-bottom:5px;
+   border-bottom:1px solid #000000;
+   text-align:center;
+}
+
+.menu
+{
+    border:3px dashed #00ffff;
+    display:flex;
+    flex-direction:row-reverse;
+    margin-bottom:30px;
+}
+
+.explaination
+{
+    width:50%;
+    margin:5%;
+}
