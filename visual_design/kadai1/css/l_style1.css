@@ -21,7 +21,6 @@ section:nth-child(even) h2
 .container
 {
     display:flex;
-    height:200px;
 }
 
 .caption
