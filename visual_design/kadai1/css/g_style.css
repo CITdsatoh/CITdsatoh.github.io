@@ -5,6 +5,11 @@ body
    width:80%;
 }
 
+#hidden_link
+{
+  text-decoration: none;
+}
+ 
 div.title
 {
    margin-left:15%;
@@ -13,6 +18,7 @@ div.title
    background-image:url("../img/meal.jpg");
    background-repeat:no-repeat;
 }
+
 h1
 {
     text-align:center;
