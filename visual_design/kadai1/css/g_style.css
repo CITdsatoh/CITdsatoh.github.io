@@ -64,12 +64,23 @@ p.annotate:before,p.annotate:after
      left:calc((80%-20px)/4);
      display:none;
 }
+#global_navigation ul li#access_intro ul#sub_navi2
+{
+    padding:20px;
+     width:calc((80%-20px)/4);
+     background-color:#00ffff;
+     position: absolute;
+     top:400px;
+     left:calc(3*((80%-20px)/4));
+     display:none;
+}
 
-#global_navigation ul li#menu_intro:hover ul#sub_navi1 
+#global_navigation ul li#menu_intro:hover ul#sub_navi1, #global_navigation ul li#access_intro:hover ul#sub_navi2
 {
    display:block;
 }
-#global_navigation ul li#menu_intro:hover ul#sub_navi1 li
+#global_navigation ul li#menu_intro:hover ul#sub_navi1 li, #global_navigation ul li#access_intro:hover ul#sub_navi2 li
+
 {
    display:block;
    border-bottom:1px solid #ffffff;
