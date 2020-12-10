@@ -10,11 +10,13 @@ h2
 {
     display:flex;
     margin:50px;
+    background-color:#00ff00;
     border-top:2px solid #000000;
     border-bottom:2px solid #000000;
 }
 section
 {
+     margin:10px;
      border:5px dashed #00ffff;
 }
 
@@ -25,6 +27,13 @@ section
    width:50%;
    margin:5%;
 }
+
+strong
+{
+   color:#ff0000;
+   font-weight:bold;
+}
+   
 
 
 .arrow
