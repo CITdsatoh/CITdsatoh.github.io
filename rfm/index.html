@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="UTF-8">
+  <meta name="description" content="逃走中のある残り時間時点での計算機">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>逃走中の賞金計算機</title>
+  <script src="tosouchu.js" charset="shift_jis" ></script>
+  <link rel="stylesheet" href="style.css">
+ </head>
+ <body>
+  <main>
+   <h1>逃走中でのある地点での賞金計算機</h1>
+   <div id="calculator_all">
+     <section id="explaination">
+       <h2>使い方の説明</h2>
+       <ol id="procedure">
+         <li>まずは全体のゲーム時間とゲームが始まった時点での賞金単価を入力してください</li>
+         <li>もし、ゲームの途中で賞金単価に変動が出る場合、下にある「賞金単価変動ルール追加」ボタンを押してください。すると、途中から賞金単価の変動に対応できます。なお、賞金単価の変動は3回まで対応できます。</li>
+         <li>もし、賞金単価変動を行った場合、その賞金変動が起こったときの残り時間と変動後の賞金単価を必ず入力してください</li>
+         <li>そして、最後に、賞金を計算したいと思っている地点（ゲームの残り時間)を入力し、「計算」ボタンを押してください</li>
+       </ol>
+     </section>  
+     <section id="calculator">
+       <div id="calculation">
+         <p id="game_info">ゲーム時間:<input type="text" name="game_time" size="6" maxlength="3">分</p>
+         <div id="money_rules">
+           <p class="money_per_second">賞金単価(初期):1秒<input type="text" name="initial_money_per_second" maxlength="4" size="6">円</p>
+         </div>
+         <p id="calc_time">残り時間<input type="text" name="remaining_min" size="6" maxlength="3">分<input type="text" name="remaining_sec" maxlength="2" size="6">秒時点での賞金を計算する</p>
+         <p class="buttons"><button id="money_rule_add" type="button" onclick="addMoneyrule();">賞金単価変動ルール追加</button>&nbsp;<button id="money_rule_remove" type="button" onclick="removeMoneyrule()">賞金単価変動ルール削除</button></p>
+         <p class="buttons"><button id="calc" type="button" onclick="dispResult();">計算</button>&nbsp;<button id="reset" type="button" onclick="reset();">リセット</button></p>
+       </div>
+       <p id="result_message" style="display:none"></p>
+     </section>
+    </div>
+  </main>
+ </body>
+</html>
