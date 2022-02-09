@@ -1,0 +1,53 @@
+@charset:utf-8;
+
+p,h1,h2
+{
+  text-align:center;
+}
+
+#explaination h2
+{
+   border-bottom:1px solid #000000;
+}
+
+
+#procedure li
+{
+    padding:2px;
+    margin:1px;
+    text-indent:1em;
+}
+
+
+main
+{
+   margin-left:15%;
+   margin-right:15%;
+   border:5px solid #0000ff;
+}
+
+section
+{
+    margin:30px 10%;
+    padding:15px 5%;
+    border:3px groove #00ffff;
+}
+
+div#calculation
+{
+   margin-bottom:5px;
+}
+p
+{
+   text-align:center;
+}  
+
+#money_rules
+{
+    border:1px dashed #88ffff;
+}
+
+#money_rules p
+{
+    padding:2px;
+}
