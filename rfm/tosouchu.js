@@ -15,13 +15,13 @@ function addMoneyrule()
     parent_new_money_rule.className="money_per_second";
     
    if(money_rule_num == 1){
-     parent_new_money_rule.innerHTML='c‚èŠÔ<input type="text" name="money_rule_change_time1" size="6" maxlength="3">•ªˆÈ~:1•b<input type="text" name="money_per_second_rule1" size="6" maxlength="4">‰~';
+     parent_new_money_rule.innerHTML='æ®‹ã‚Šæ™‚é–“<input type="text" name="money_rule_change_time1" size="6" maxlength="3">åˆ†ä»¥é™:1ç§’<input type="text" name="money_per_second_rule1" size="6" maxlength="4">å††';
    }
    else if(money_rule_num ==2){
-      parent_new_money_rule.innerHTML='c‚èŠÔ<input type="text" name="money_rule_change_time2" size="6" maxlength="3">•ªˆÈ~:1•b<input type="text" name="money_per_second_rule2" size="6" maxlength="4" >‰~';
+      parent_new_money_rule.innerHTML='æ®‹ã‚Šæ™‚é–“<input type="text" name="money_rule_change_time2" size="6" maxlength="3">åˆ†ä»¥é™:1ç§’<input type="text" name="money_per_second_rule2" size="6" maxlength="4" >å††';
    }
    else if(money_rule_num ==3){
-      parent_new_money_rule.innerHTML='c‚èŠÔ<input type="text" name="money_rule_change_time3" size="6" maxlength="3">•ªˆÈ~:1•b<input type="text" name="money_per_second_rule3" size="6" maxlength="4" >‰~';
+      parent_new_money_rule.innerHTML='æ®‹ã‚Šæ™‚é–“<input type="text" name="money_rule_change_time3" size="6" maxlength="3">åˆ†ä»¥é™:1ç§’<input type="text" name="money_per_second_rule3" size="6" maxlength="4" >å††';
    }
    
    before_money_rule_para.after(parent_new_money_rule);
@@ -66,7 +66,7 @@ function dispResult(){
    result_message_para.textContent=result;
    result_message_para.style.display="block";
    result_message_para.style.color="black";
-   var re=new RegExp("ƒGƒ‰[");
+   var re=new RegExp("ã‚¨ãƒ©ãƒ¼");
    if (re.test(result)){
       result_message_para.style.color="rgb(255, 0, 0)";
    }
@@ -79,7 +79,7 @@ function getResult(){
    console.log(game_time_str);
    
    if (isError(game_time_str,correct_num)){
-      return "ƒGƒ‰[:ƒQ[ƒ€ŠÔ‚Ì“ü—Í‚ª•s³‚Å‚·";
+      return "ã‚¨ãƒ©ãƒ¼:ã‚²ãƒ¼ãƒ æ™‚é–“ã®å…¥åŠ›ãŒä¸æ­£ã§ã™";
     }
 
    var game_time=parseInt(game_time_str);
@@ -91,7 +91,7 @@ function getResult(){
    console.log(initial_money_rule)
    
    if(isError(initial_money_rule,correct_num)){
-      return "ƒGƒ‰[:Ü‹à’P‰¿‚Ì“ü—Í‚ª•s³‚Å‚·";
+      return "ã‚¨ãƒ©ãƒ¼:è³é‡‘å˜ä¾¡ã®å…¥åŠ›ãŒä¸æ­£ã§ã™";
    }
    
    var initial_money_per_second=parseInt(initial_money_rule);
@@ -105,13 +105,13 @@ function getResult(){
          new_rule_start_time_str=money_rules[i].value;
          new_money_per_second_str=money_rules[i+1].value;
          if (! (additional_money_rules_correct_num.test(new_rule_start_time_str)&& additional_money_rules_correct_num.test(new_money_per_second_str))){
-            return "ƒGƒ‰[:Ü‹à’P‰¿‚Ì•Ï“®ŠÔ‚©•Ï“®Œã‚Ì‹àŠz‚Ì‚Ç‚¿‚ç‚©‚Ì“ü—Í‚É•s³‚ª‚ ‚è‚Ü‚·B";
+            return "ã‚¨ãƒ©ãƒ¼:è³é‡‘å˜ä¾¡ã®å¤‰å‹•æ™‚é–“ã‹å¤‰å‹•å¾Œã®é‡‘é¡ã®ã©ã¡ã‚‰ã‹ã®å…¥åŠ›ã«ä¸æ­£ãŒã‚ã‚Šã¾ã™ã€‚";
           }
          if (!(new_rule_start_time_str.length == 0||new_money_per_second_str.length == 0)){
             new_rule_start_time=parseInt(new_rule_start_time_str);
             new_money_per_second=parseInt(new_money_per_second_str);
             if (game_time < new_rule_start_time){
-               return "ƒGƒ‰[:Ü‹à’P‰¿‚Ì•Ï“®‚·‚é“_‚Ìc‚èŠÔ‚ªAƒQ[ƒ€‚»‚ê©‘Ì‚ÌŠÔ‚ğ’´‚¦‚Ä‚¢‚Ü‚·";
+               return "ã‚¨ãƒ©ãƒ¼:è³é‡‘å˜ä¾¡ã®å¤‰å‹•ã™ã‚‹æ™‚ç‚¹ã®æ®‹ã‚Šæ™‚é–“ãŒã€ã‚²ãƒ¼ãƒ ãã‚Œè‡ªä½“ã®æ™‚é–“ã‚’è¶…ãˆã¦ã„ã¾ã™";
             }
             money_rules_change_time.push(new_rule_start_time);
             money_per_second.push(new_money_per_second);
@@ -123,7 +123,7 @@ function getResult(){
    var calc_min_str=document.querySelector("input[name='remaining_min']").value;
    var calc_sec_str=document.querySelector("input[name='remaining_sec']").value;
    if(isError(calc_min_str,correct_num) || isError(calc_sec_str,new RegExp("^[0-9]{1,2}$"))){
-        return "ƒGƒ‰[:ŒvZ‚µ‚æ‚¤‚Æ‚µ‚Ä‚¢‚éc‚èŠÔ‚Ì“ü—Í‚ÉƒGƒ‰[‚ª‚ ‚è‚Ü‚·";
+        return "ã‚¨ãƒ©ãƒ¼:è¨ˆç®—ã—ã‚ˆã†ã¨ã—ã¦ã„ã‚‹æ®‹ã‚Šæ™‚é–“ã®å…¥åŠ›ã«ã‚¨ãƒ©ãƒ¼ãŒã‚ã‚Šã¾ã™";
     }
    
    var calc_min=parseInt(calc_min_str);
@@ -131,12 +131,12 @@ function getResult(){
    
    if( (game_time < calc_min) || (game_time == calc_min && calc_sec > 0))
    {
-       return "ƒGƒ‰[:ŒvZ‚µ‚æ‚¤‚Æ‚µ‚Ä‚¢‚éc‚èŠÔ‚ªAƒQ[ƒ€‘S‘Ì‚ÌŠÔ‚ğ’´‚¦‚Ä‚¢‚Ü‚·‚Ì‚Å“ü—Í‚ğ‚â‚è’¼‚µ‚Ä‚­‚¾‚³‚¢";
+       return "ã‚¨ãƒ©ãƒ¼:è¨ˆç®—ã—ã‚ˆã†ã¨ã—ã¦ã„ã‚‹æ®‹ã‚Šæ™‚é–“ãŒã€ã‚²ãƒ¼ãƒ å…¨ä½“ã®æ™‚é–“ã‚’è¶…ãˆã¦ã„ã¾ã™ã®ã§å…¥åŠ›ã‚’ã‚„ã‚Šç›´ã—ã¦ãã ã•ã„";
    }
    
    if (calc_sec >= 60)
    {
-       return "ƒGƒ‰[:•b”‚Ìw’è‚ª•s³‚Å‚·";
+       return "ã‚¨ãƒ©ãƒ¼:ç§’æ•°ã®æŒ‡å®šãŒä¸æ­£ã§ã™";
    }
    
    sort(money_rules_change_time,money_per_second);
@@ -146,7 +146,7 @@ function getResult(){
    
    calc_result_money=CalcMoney(money_rules_change_time,money_per_second,calc_min,calc_sec);
    
-   return "c‚è"+calc_min_str+"•ª"+calc_sec_str+"•b“_‚Å‚ÌÜ‹à‚Í"+calc_result_money+"‰~‚Å‚·";
+   return "æ®‹ã‚Š"+calc_min_str+"åˆ†"+calc_sec_str+"ç§’æ™‚ç‚¹ã§ã®è³é‡‘ã¯"+calc_result_money+"å††ã§ã™";
    
 
 }
