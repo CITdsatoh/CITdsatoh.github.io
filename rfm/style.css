@@ -14,7 +14,7 @@ p,h1,h2
 #procedure li
 {
     padding:2px;
-    margin:1px;
+    margin:1px 1%;
     text-indent:1em;
 }
 
@@ -23,11 +23,13 @@ main
 {
    margin-left:15%;
    margin-right:15%;
+   width:70%;
    border:5px solid #0000ff;
 }
 
 section
 {
+    width:70%;
     margin:30px 10%;
     padding:15px 5%;
     border:3px groove #00ffff;
@@ -35,7 +37,7 @@ section
 
 div#calculation
 {
-   margin-bottom:5px;
+   margin-bottom:5%;
 }
 p
 {
