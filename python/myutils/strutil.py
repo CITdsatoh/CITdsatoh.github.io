@@ -1,8 +1,9 @@
 #encoding:utf-8
 
 from operator import xor
+from math import ceil
 
-def int_to_str(num:int,base=10):
+def int_to_str(num:int,base=10,is_lower=True):
   
   result=""
   digit=1
@@ -15,7 +16,7 @@ def int_to_str(num:int,base=10):
   while digit <= num_positive:
     
     dig_num=int(num_positive/digit)%base
-    dig_str=num_to_chr(dig_num)
+    dig_str=num_to_chr(dig_num,is_lower)
     result=dig_str+result
     digit *=base
   
@@ -28,45 +29,56 @@ def int_to_str(num:int,base=10):
   return result
  
 
-def num_to_chr(num:int):
+def num_to_chr(num:int,is_lower):
   if num >= 0  and num < 10:
     return chr(ord("0")+num)
   
-  return chr(ord("a")+(num-10))
+  a_ord=ord("a") if is_lower else ord("A")
+  
+  return chr(a_ord+(num-10))
   
 
 class StrRange:
 
-   def __init__(self,start,goal=None,step=None,base=None):
+   def __init__(self,start=0,goal=None,step=None,base=None):
     
     
     if step == 0:
       raise ValueError()
     
+    self.is_lower=True
     self.step=1 if step is None else step
     self.base=10 if base is None else base
     self.goal=start if goal is None else goal
     
+    
     self.start=0 if goal is None else start
     if type(self.start) != int:
-      try:
-       self.start=int(self.start,self.base)
-      except ValueError:
-       self.start=int(self.start,16)
-       self.base=16
+      only_alpha="".join([ch for ch in self.start if ch.isalpha()])
+      self.is_lower=not(only_alpha.isupper())
+      is_upper=only_alpha.isupper()
+      while  self.base < 36:
+       try:
+        self.start=int(self.start,self.base)
+       except ValueError:
+        self.base=16 if self.base == 10 else self.base+1 
+       else:
+        break
     
     if type(self.goal) != int:
-      try:
-       self.goal=int(self.goal,self.base)
-      except ValueError:
-       self.goal=int(self.goal,16)
-       self.base=16
+      only_alpha="".join([ch for ch in self.goal if ch.isalpha()])
+      self.is_lower=not(only_alpha.isupper()) and self.is_lower
+      while  self.base < 36:
+       try:
+        self.goal=int(self.goal,self.base)
+       except ValueError:
+         self.base=16 if self.base == 10 else  self.base+1
+       else:
+         break
     
     self.now_num=self.start
     self.is_up=(0 < self.step)
     
-    if xor(0 < self.step,self.start <= self.goal):
-      raise ValueError()
     
    def __str__(self):
    
@@ -75,16 +87,32 @@ class StrRange:
        try:
          value=self.__next__()
        except StopIteration:
-         return result[0:len(result)-1]
+         return "["+result[0:len(result)-1]+"]"
        else:
          result+=(value+",")
-       
+   
+   def copy(self):
+      return eval(self.__repr__())
+   
+   def __getitem__(self,key):
+      if self.__len__() <= key:
+         raise IndexError("StrRange object index out of range")
+      
+      value=int_to_str(self.start+(self.step*key),self.base,self.is_lower)
+      
+      return value
        
    def __iter__(self):
       return self
    
    def __len__(self):
-      return int((self.goal-self.start)/self.step)
+     
+     ret=int(ceil((self.goal-self.start)/self.step))
+     
+     if ret < 0:
+       ret=0
+     
+     return ret
       
    def __repr__(self):
    
@@ -103,7 +131,7 @@ class StrRange:
         self.now_num=self.start
         raise StopIteration()
       
-      value=int_to_str(self.now_num,self.base)
+      value=int_to_str(self.now_num,self.base,self.is_lower)
       
       self.now_num += self.step
       
