@@ -257,6 +257,10 @@ class MyFraction:
      
      def __rpow__(self,other):
        
+       if type(other) == MyFraction:
+         return other.__float__()**self.__float__()
+         
+       
        return other**self.__float__()
      
      def __invert__(self):
