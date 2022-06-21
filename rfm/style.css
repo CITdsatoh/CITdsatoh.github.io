@@ -35,6 +35,12 @@ section
     border:3px groove #00ffff;
 }
 
+.buttons
+{
+   padding-top:3px;
+   padding-bottom:3px;
+}
+
 div#calculation
 {
    margin-bottom:5%;
