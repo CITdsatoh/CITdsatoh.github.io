@@ -72,6 +72,13 @@ function dispResult(){
    }
 }
 
+function dispResultWin(){
+  document.querySelector("input[name='remaining_min']").value="0";
+  document.querySelector("input[name='remaining_sec']").value="0";
+  dispResult();
+}
+
+
 function getResult(){
    var game_time_str=document.querySelector("input[name='game_time']").value;
    var correct_num=new RegExp("^[0-9]{1,4}$")
@@ -122,12 +129,17 @@ function getResult(){
    
    var calc_min_str=document.querySelector("input[name='remaining_min']").value;
    var calc_sec_str=document.querySelector("input[name='remaining_sec']").value;
-   if(isError(calc_min_str,correct_num) || isError(calc_sec_str,new RegExp("^[0-9]{1,2}$"))){
+   if(isError(calc_min_str,correct_num) || !(new RegExp("^[0-9]{1,2}$").test(calc_sec_str))){
         return "エラー:計算しようとしている残り時間の入力にエラーがあります";
     }
    
    var calc_min=parseInt(calc_min_str);
    var calc_sec=parseInt(calc_sec_str);
+   if(calc_sec_str.length === 0){
+      document.querySelector("input[name='remaining_sec']").value="0";
+      calc_sec=0;
+      calc_sec_str="0";
+    }
    
    if( (game_time < calc_min) || (game_time == calc_min && calc_sec > 0))
    {
