@@ -29,6 +29,8 @@
          <p id="calc_time">残り時間<input type="text" name="remaining_min" size="6" maxlength="3">分<input type="text" name="remaining_sec" maxlength="2" size="6">秒時点での賞金を計算する</p>
          <p class="buttons"><button id="money_rule_add" type="button" onclick="addMoneyrule();">賞金単価変動ルール追加</button>&nbsp;<button id="money_rule_remove" type="button" onclick="removeMoneyrule()">賞金単価変動ルール削除</button></p>
          <p class="buttons"><button id="calc" type="button" onclick="dispResult();">計算</button>&nbsp;<button id="reset" type="button" onclick="reset();">リセット</button></p>
+         <p class="buttons"><button id="wincalc" type="button" onclick="dispResultWin();">逃げ切ったときの賞金を計算する</button></p>
+       </div>
        </div>
        <p id="result_message" style="display:none"></p>
      </section>
