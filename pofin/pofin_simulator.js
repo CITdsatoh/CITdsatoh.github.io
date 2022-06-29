@@ -239,6 +239,15 @@ class PofinMaker{
    
  }
  
+ toString(){
+   
+   let used_nutses=this.used_nuts_name[0];
+   for(var i=1;i<this.used_nuts_name.length;i++){
+     used_nutses=used_nutses+"+"+this.used_nuts_name[i];
+   }
+   return used_nutses;
+ }
+ 
  static isOverlapNuts(all_nuts){
    for(var i=0;i<all_nuts.length-1;i++){
      for(var j=i+1;j<all_nuts.length;j++){
@@ -250,6 +259,7 @@ class PofinMaker{
    
    return false;
  }
+ 
  
 }
   
