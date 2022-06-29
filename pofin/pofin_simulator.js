@@ -173,15 +173,20 @@ class PofinMaker{
     let penalty=burnt_time+spilt_time;
     let tastes_num=0;
     let real_tastes=[];
-    let all_zero=true;
+    let all_less_five=true;
     
     for(var i=0;i<this.tastes_sum.length;i++){
        if(this.tastes_sum[i]-penalty <= 0){
          real_tastes.push(0);
          continue;
        }
+       
        tastes_num++;
-       all_zero=false;
+       
+       if(this.tastes_sum[i]-penalty > 5){
+          all_less_five=false;
+       }
+       
        if(this.tastes_sum[i]-penalty > 99){
          real_tastes.push(99-penalty);
          continue;
@@ -189,7 +194,7 @@ class PofinMaker{
        real_tastes.push(this.tastes_sum[i]-penalty);
     }
     
-    if(all_zero||PofinMaker.isOverlapNuts(this.used_nuts_name)){
+    if(all_less_five||PofinMaker.isOverlapNuts(this.used_nuts_name)){
       for(var i=0;i<real_tastes.length;i++){
         real_tastes[i]=parseInt(Math.floor(Math.random()*5));
       }
@@ -204,6 +209,10 @@ class PofinMaker{
       if(real_tastes[i] !== 0){
         var taste_minus=parseInt(Math.floor(tastes_num/2))+1;
         real_tastes[i]=parseInt((real_tastes[i]-taste_minus)*bias);
+        if(real_tastes[i] > 99){
+           real_tastes[i]=99;
+        }
+        
       }
     }
     
