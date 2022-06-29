@@ -145,7 +145,7 @@ all_nuts.push(["フジョ",[1,5,5,1,5],55]);
      }
      
      let made_pofin=pofin_maker.getPofin();
-     dispInfo(made_pofin);
+     dispInfo(pofin_maker,made_pofin);
        
   
   }
@@ -174,7 +174,7 @@ all_nuts.push(["フジョ",[1,5,5,1,5],55]);
   
   }
    
-  function dispInfo(pofin_info){
+  function dispInfo(maker_info,pofin_info){
     
     let pofin_name_input=document.querySelector("input[name='pofin_name']");
     pofin_name_input.value=pofin_info.getPofinName();
@@ -196,7 +196,7 @@ all_nuts.push(["フジョ",[1,5,5,1,5],55]);
      
      
     let pofin_made_history=document.querySelector("textarea[name='pofin_history']");
-    pofin_made_history.value=pofin_made_history.value+pofin_info+"\n";
+    pofin_made_history.value=pofin_made_history.value+maker_info+"\n"+pofin_info+"\n\n";
      
   }
   
