@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="utf-8">
+  <meta property="description" content="ポフィンシミュレーター、ポフィンを作った時どうなるか">
+  <meta property="author" content="dsatoh">
+  <title>ポフィンシミュレーター（新)</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="pofin_simulator.js" text="text/javascript" charset="utf-8"></script>
+  <script src="mk_pofin_corners.js" text="text/javascript" charset="utf-8"></script>
+ </head>
+ <body>
+  <header>
+   <h1>ポフィンシミュレーター（新)</h1>
+  </header>
+  <main>
+   <section id="explaination">
+    <ul>
+     <li>これは、実際に選択された木の実を使用したとき、どんなポフィンが作れるかを計算する疑似計算機です。</li>
+     <li>最大4つ（1人1個ずつ、4人まで）まで木の実を選ぶことができます。同じ種類の木の実を複数入れることもできますが、その場合、それ以外の木の実がどんなに良いものであっても、確実に<span class="emphasis">まずいポフィン</span>が出来上がってしまうので注意してください</li>
+     <li>その他、調理秒数（30秒以上、60秒以下)、筆跡一致回数（複数人で作った時のみ）、失敗回数（こぼした・こがした）も条件として入力できます.</li>
+    </ul>
+   </section>
+   <section id="input_corners">
+     <div class="one_corner" id="nuts_input_corner">
+      <h2>木の実の入力</h2>
+      <p>1人目(1個目):<select class="nuts" name="nuts1"></select>&nbsp;2人目(2個目):<select class="nuts" name="nuts2"><option value="0">不参加(何も入れない)</option></select>&nbsp;
+      <br>3人目(3個目):<select class="nuts" name="nuts3"><option value="0">不参加(何も入れない)</option></select>&nbsp;4人目(4個目)<select class="nuts" name="nuts4"><option value="0">不参加(何も入れない)</option></select></p>
+     </div>
+     <div class="one_corner" id="condition_input_corner">
+      <h2>調理条件の入力</h2>
+      <p>調理時間:<input type="text" maxlength="5" size="5"  name="time">秒&nbsp;こぼした回数:<input type="text" maxlength="3" size="3" name="spilt">回&nbsp;こがした回数:<input type="text" maxlength="3" size="3" name="burnt">回</p>
+      <p>筆跡一致回数(複数人の時のみ):<select name="accordition"></select></p>
+     </div>
+     <p><button type="button" id="calc_button" onclick="calc();">ポフィンを作成</button>&nbsp;<button id="reset" id="reset_button" onclick="resetAll()">設定をクリア</button></p>
+   </section>
+   <section id="result_corners">
+    <div class="one_corner" id="pofin_result_corner">
+      <h2>調理結果</h2>
+      <p><input type="text" name="pofin_name" size="6" readonly>ポフィン&nbsp;Lv.<input type="text" name="pofin_level" size="2" readonly></p>
+      <p>辛:<input type="text" name="karai" class="tastes" readonly size="2">&nbsp;渋:<input type="text" name="shibui" class="tastes" size="2" readonly>&nbsp;甘:<input type="text" name="amai" class="tastes" size="2" readonly>&nbsp;
+      苦:<input type="text"name="nigai" class="tastes" size="2" readonly>&nbsp;酸:<input type="text" name="suppai" class="tastes" size="2" readonly><br>
+      滑:<input type="text" name="pofin_smooth" size="3" readonly>&nbsp;
+      効率:<input type="text" name="pofin_rate" size="4" readonly></p>
+    </div>
+    <div class="one_corner" id="pofin_history_corner">
+     <h2>調理履歴</h2>
+     <p><textarea name="pofin_history" cols="40" rows="15" readonly></textarea></p>
+    </div>
+   </section>
+  </main>
+  <footer><p><small>&copy;dsatoh</small></p></footer>
+  <script text="text/javascript"charset="utf-8">
+   window.addEventListener('DOMContentLoaded',(event)=>
+   {
+      mkOption();
+   });
+  </script>
+ </body>
+</html>
