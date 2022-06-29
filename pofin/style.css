@@ -1,0 +1,44 @@
+@charset:utf-8;
+
+body
+{
+    background-color:#ddffff;
+}
+
+h1,h2,p
+{
+   text-align:center;
+}
+
+section
+{
+    margin-left:20%;
+    margin-right:20%;
+    margin-bottom:20px;
+    border:3px #88ffff solid;
+    padding:5px;
+}
+
+div.one_corner
+{
+      border:1px #aaffff dashed;
+      padding:1px;
+      margin-bottom:5px;
+}
+
+span.emphasis
+{
+     font-weight:bold;
+}
+
+span.emphasis:before
+{
+   content:"「";
+}
+
+span.emphasis:after
+{
+   content:"」";
+}
+
+
