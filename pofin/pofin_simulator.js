@@ -188,7 +188,7 @@ class PofinMaker{
        }
        
        if(this.tastes_sum[i]-penalty > 99){
-         real_tastes.push(99-penalty);
+         real_tastes.push(99);
          continue;
        }
        real_tastes.push(this.tastes_sum[i]-penalty);
@@ -211,6 +211,9 @@ class PofinMaker{
         real_tastes[i]=parseInt((real_tastes[i]-taste_minus)*bias);
         if(real_tastes[i] > 99){
            real_tastes[i]=99;
+        }
+        if(real_tastes[i] < 0){
+           real_tastes[i]=0;
         }
         
       }
