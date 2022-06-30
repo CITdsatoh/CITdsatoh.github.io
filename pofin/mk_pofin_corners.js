@@ -200,17 +200,28 @@ all_nuts.push(["フジョ",[1,5,5,1,5],55]);
      
   }
   
-  function resetAll(){
+  function reset(){
     let all_selects=document.querySelectorAll("select");
     for(var one_select of all_selects){
       one_select.selectedIndex=0;
     }
     
-    let all_text_inputs=document.querySelectorAll("input[type='text'],textarea");
+    let all_text_inputs=document.querySelectorAll("input[type='text']");
     for(var one_text_input of all_text_inputs){
       one_text_input.value="";
     }
     
+  }
+  
+  function resetAll(){
+     reset();
+     resetHistory();
+  }
+  
+  
+  function resetHistory(){
+     let history_textarea=document.querySelector("textarea[name='pofin_history']");
+     history_textarea.value="";
   }
   
  
