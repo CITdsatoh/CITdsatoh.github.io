@@ -152,14 +152,14 @@ class PofinMaker{
   getPofin(){
     let spilt_time_corner=document.querySelector("input[name='spilt']");
     let spilt_time=parseInt(sanitizing(spilt_time_corner.value));
-    if(isNaN(spilt_time)||spilt_time_corner.value.length===0){
+    if(isNaN(spilt_time)||spilt_time_corner.value.length===0||spilt_time < 0){
       spilt_time=0;
       spilt_time_corner.value="0";
     }
     
     let burnt_time_corner=document.querySelector("input[name='burnt']");
     let burnt_time=parseInt(sanitizing(burnt_time_corner.value));
-    if(isNaN(burnt_time)||burnt_time_corner.value.length===0){
+    if(isNaN(burnt_time)||burnt_time_corner.value.length===0||burnt_time < 0){
       burnt_time=0;
       burnt_time_corner.value="0";
     }
