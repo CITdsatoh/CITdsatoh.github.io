@@ -171,6 +171,13 @@ all_nuts.push(["フジョ",[1,5,5,1,5],55]);
      one_option.text=""+i+"回";
      accordition_time_selection.appendChild(one_option);
    }
+   
+   let nuts_buttons=document.querySelectorAll("button.nuts_buttons");
+   for(var one_nuts_button of nuts_buttons){
+     one_nuts_button.addEventListener('click', function(){
+        selectCancel(this.id);
+     });
+   }
   
   }
    
@@ -198,6 +205,13 @@ all_nuts.push(["フジョ",[1,5,5,1,5],55]);
     let pofin_made_history=document.querySelector("textarea[name='pofin_history']");
     pofin_made_history.value=pofin_made_history.value+maker_info+"\n"+pofin_info+"\n\n";
      
+  }
+  
+  function selectCancel(select_name){
+    let selection_str="select[name='"+select_name+"']";
+    let selection=document.querySelector(selection_str);
+    
+    selection.options.selectedIndex=0;
   }
   
   function reset(){
