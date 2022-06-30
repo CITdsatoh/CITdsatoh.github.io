@@ -33,7 +33,7 @@
       <p>調理時間:<input type="text" maxlength="5" size="5"  name="time">秒&nbsp;こぼした回数:<input type="text" maxlength="3" size="3" name="spilt">回&nbsp;こがした回数:<input type="text" maxlength="3" size="3" name="burnt">回</p>
       <p>筆跡一致回数(複数人の時のみ):<select name="accordition"></select></p>
      </div>
-     <p><button type="button" id="calc_button" onclick="calc();">ポフィンを作成</button>&nbsp;<button id="reset" id="reset_button" onclick="resetAll()">設定をクリア</button></p>
+     <p><button type="button" id="calc_button" onclick="calc();">ポフィンを作成</button>&nbsp;<button id="reset_button" type="button" onclick="reset()">設定をクリア</button>&nbsp;<button id="all_reset_button" type="button" onclick="resetAll()">すべてクリア</button></p>
    </section>
    <section id="result_corners">
     <div class="one_corner" id="pofin_result_corner">
@@ -47,6 +47,7 @@
     <div class="one_corner" id="pofin_history_corner">
      <h2>調理履歴</h2>
      <p><textarea name="pofin_history" cols="40" rows="15" readonly></textarea></p>
+     <p><button id="history_reset" onclick="resetHistory();" type="button">履歴リセット</button></p>
     </div>
    </section>
   </main>
