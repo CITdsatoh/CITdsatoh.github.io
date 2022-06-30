@@ -12,10 +12,12 @@ class Nuts{
      this.no=no;
      this.name=name;
      this.tastes=[];
+     this.taste_num=0;
      for(let one_taste of tastes){
        var value=0;
        if(one_taste > 0){
          value=(one_taste+1)*5;
+         this.taste_num++;
        }
        this.tastes.push(value);
      }
@@ -41,7 +43,6 @@ class Pofin{
  constructor(tastes,smooth){
     this.tastes=tastes;
     this.smooth=smooth;
-    
   }
   
   getLevel(){
@@ -132,11 +133,16 @@ class PofinMaker{
     this.used_nuts_name=[];
     this.tastes_sum=[0,0,0,0,0];
     this.smooth_sum=0;
+    this.originally_pofin_taste_num=0;
   }
   
   addNuts(nuts){
     this.used_nuts_name.push(nuts.name);
     this.smooth_sum +=nuts.smooth;
+    if(this.originally_pofin_taste_num < nuts.taste_num){
+       this.originally_pofin_taste_num=nuts.taste_num;
+    }
+    
     let one_nuts_tastes=nuts.getRealTaste();
     for(var i=0;i<this.tastes_sum.length;i++){
       this.tastes_sum[i] += one_nuts_tastes[i];
@@ -171,27 +177,28 @@ class PofinMaker{
     }
     
     let penalty=burnt_time+spilt_time;
-    let tastes_num=0;
+    let taste_num_minus=parseInt(Math.floor(this.originally_pofin_taste_num/2))+1;
+    let time_bounus=(60.00/cooking_time);
     let real_tastes=[];
     let all_less_five=true;
     
     for(var i=0;i<this.tastes_sum.length;i++){
-       if(this.tastes_sum[i]-penalty <= 0){
+       var practically_taste_value=parseInt((this.tastes_sum[i]-penalty-taste_num_minus)*time_bounus);
+       if(practically_taste_value <= 0){
          real_tastes.push(0);
          continue;
        }
        
-       tastes_num++;
        
-       if(this.tastes_sum[i]-penalty > 5){
+       if(practically_taste_value > 5){
           all_less_five=false;
        }
        
-       if(this.tastes_sum[i]-penalty > 99){
-         real_tastes.push(99-penalty);
+       if(practically_taste_value > 99){
+         real_tastes.push(99);
          continue;
        }
-       real_tastes.push(this.tastes_sum[i]-penalty);
+       real_tastes.push(practically_taste_value);
     }
     
     if(all_less_five||PofinMaker.isOverlapNuts(this.used_nuts_name)){
@@ -202,22 +209,6 @@ class PofinMaker{
       return new Pofin(real_tastes,this.getSmooth());
     }
     
-    let bias=(60.00/cooking_time);
-    
-   
-    for(var i=0;i<real_tastes.length;i++){
-      if(real_tastes[i] !== 0){
-        var taste_minus=parseInt(Math.floor(tastes_num/2))+1;
-        real_tastes[i]=parseInt((real_tastes[i]-taste_minus)*bias);
-        if(real_tastes[i] > 99){
-           real_tastes[i]=99;
-        }
-        if(real_tastes[i] < 0){
-           real_tastes[i]=0;
-        }
-        
-      }
-    }
     
     console.log(this.used_nuts_name);
     console.log(real_tastes);
