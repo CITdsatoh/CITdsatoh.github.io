@@ -252,15 +252,7 @@ class PofinMaker{
  }
  
  static isOverlapNuts(all_nuts){
-   for(var i=0;i<all_nuts.length-1;i++){
-     for(var j=i+1;j<all_nuts.length;j++){
-       if(all_nuts[i]===all_nuts[j]){
-         return true;
-       }
-     }
-   }
-   
-   return false;
+   return all_nuts.length !== new Set(all_nuts).size;
  }
  
  
