@@ -162,7 +162,7 @@ if __name__ == "__main__":
      
      number=MyInteger(i)
      with open(file_name,"a",encoding="utf_8_sig") as f:
-      print(number.csv_str_header(),file=f)
+      print(number.csv_str(),file=f)
       f.close()
      
         
