@@ -15,14 +15,13 @@ class MyInteger:
     i=0
     factors=[]
     num=self.__num
-    last=int(self.__num**0.5)+1
-    while i < len(self.__primes_to_num):
+    while i < len(self.__primes_to_num) and self.__primes_to_num[i] < int(num**0.5)+1 :
       if num % self.__primes_to_num[i] == 0:
          factors.append(self.__primes_to_num[i])
          num=int(num/self.__primes_to_num[i])
          continue
       i += 1
-    if num != 1:
+    else:
       factors.append(num)
     
     
@@ -86,6 +85,14 @@ class MyInteger:
     
    return factors_str
         
+  
+  def __repr__(self):
+    return "%s(%d)"%(self.__class__.__name__,self.__num)
+  
+  def is_prime(self):
+    factors=self.factorize()
+    return len(factors) == 1
+  
   def csv_str(self):
     divisors=self.get_all_divisors()
     divisors_str="%d"%(divisors[0])
@@ -112,17 +119,31 @@ class MyInteger:
     last=int(num**0.5)+1
     while  numbers_to_n[i] < last  and  i < len(numbers_to_n):
       prime=numbers_to_n[i]
-      j=i+1
-      while j < len(numbers_to_n):
-        if numbers_to_n[j] % prime == 0 :
-          numbers_to_n.pop(j)
-          continue
-        j += 1
+      for j in range(i+1,len(numbers_to_n)):
+        if numbers_to_n[j] is not None and numbers_to_n[j] % prime == 0 :
+          #素数でない数を逐一リストから取り除く処理を行うと、取り除くための計算量（取り除いた後要素を詰めるという計算量)が結局増えてしまう
+          #そのためとりあえず素数でないところは今はNoneにしておく
+          numbers_to_n[j]=None
+          
+      
+      #一通りある素数の倍数をNoneにした後,後ろから順にNone(素数じゃないところ)を取り除く
+      #後ろからなのはpopメソッドが後ろから取り除いた方が,前から取り除く場合より,取り除いた後、後ろの要素を詰めるという計算が減るため
+      last=len(numbers_to_n)-1
+      k=last
+      while 0 <= k:
+         if numbers_to_n[k] is None:
+           numbers_to_n.pop(k)
+           last=len(numbers_to_n)-1
+           if k <= last:
+              continue
+           
+         k -= 1
+         
       i += 1
     
     return numbers_to_n
     
-     
+
 
 if __name__ == "__main__":
    
