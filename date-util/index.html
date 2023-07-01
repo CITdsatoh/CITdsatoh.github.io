@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+  <head>
+   <meta charset="UTF-8">
+   <title>日付いろいろ計算機</title>
+   <meta name="description" content="2つの日付間の中間日付やちょうど3分の1に当たる点などを計算">
+   <link rel="stylesheet" href="style.css">
+   <script src="corner_operation.js" type="text/javascript" charset="utf-8"></script>
+   <script src="main.js" type="text/javascript" charset="utf-8"></script> 
+  </head>
+  <body>
+    <header>
+      <h1>日付いろいろ計算機</h1>
+    </header>
+    <main>
+      <section id="main-explaination">
+         <h2>使用方法の簡易説明</h2>
+         <ul id="all-explaination-corner">
+           <li>ここでは入力した2つの日付に対していろいろな計算ができます</li>
+           <li>1つ目の機能の「区間分割日付算出」機能では,2つの日付間を複数の期間を等しい日数ごとに区切った場合,どの日付で区切るのかを求めるものです
+              <li class="explaination-example">使用例):2つの日付の中間点算出(2分割の場合),夏休み区間を3つに分けて,夏休みが始まって3分の1が経過する日付を算出するなど</li>
+           </li>
+           <li>2つ目の機能の「n倍日付算出」機能では,入力した2つの日付に生まれた人間が,後に生まれた人間が先に生まれた人間の〇倍の年齢になる日付はいつかを算出するものです
+              <li class="explaination-example">使用例):親子の生年月日を入力して,親の年齢が子の年齢の3倍になる日付を算出するなど</li>
+           </li>
+         </ul>
+      </section>
+      <section id="func-choice-corner">
+         <h2>機能選択</h2>
+           <p><input type="radio" name="func-choice" value="date-split-calc" checked onclick="choiceChange(this);">区間分割日付算出&nbsp;
+           <input type="radio" name="func-choice" value="age-n-times-date-calc" onclick="choiceChange(this);">n倍日付算出
+           </p>
+      </section>
+      <section id="main-calc-corner" style="margin-bottom:50px;">
+         <div id="date-split-calc-corner">
+            <h2>区間分割日付算出</h2>
+            <ul id="date-split-calc-explaination">
+               <li>ここでは入力された2つの日付の間を以下の分割数入力欄に入力された数に区切ったとき,どの日付が区切りになるのかを算出します</li>
+               <li>例えば,分割数が2の時は,入力された日付間を2つに区切ったとき,どの日で区切られるのか,つまり中間日付を算出します</li>
+               <li>さらに,分割数が3の時は,入力された日付間を3つに区切ったとき,どの日で区切られるのか,3分の1経過日と3分の2経過日を算出します</li>
+               <li>このように,入力された分割数で日付間を等しい日数ずつで区切ったとき,どの日になるのかを,それぞれ,分割数分の分割数-1まで算出します</li>
+               <li>なお,入力した日付間の日数が,分割数で割り切れない場合(どの区間も等しくできないような場合)は,四捨五入して算出します。その場合,必ず等しくならないのでご了承ください</li>
+               <li>算出できるのは明治6年(1873年)以降のみで(それ以前は旧暦なので今の暦と異なり,正確な日数を算出することができないため),分割数は2から30までの整数のみといたします</li>
+            </ul>
+            <div id="date-split-calc-input-date-corner" class="disp-corners">
+               <p>分割数:<input type="text" name="date-split-calc-num" maxlength="2" size="2">つ&nbsp;<button id="date-split-calc-num-cancel-button">取消</button></p>
+               <p>開始日:西暦<input type="text" name="date-split-calc-start-year" class="date-split-calc-start-date-inputs date-split-calc-year-inputs" maxlength="4" size="5">年<input type="text" name="date-split-calc-start-month" class="date-split-calc-start-date-inputs date-split-calc-month-inputs" maxlength="2" size="3">月<input type="text" name="date-split-calc-start-day" class="date-split-calc-start-date-inputs date-split-calc-day-inputs" maxlength="2" size="3">日
+               &nbsp;<button id="date-split-calc-start-cancel-button">取消</button></p>
+               <p>終了日:西暦<input type="text" name="date-split-calc-end-year" class="date-split-calc-end-date-inputs date-split-calc-year-inputs" maxlength="4" size="5">年<input type="text" name="date-split-calc-end-month" class="date-split-calc-end-date-inputs date-split-calc-month-inputs" maxlength="2" size="3">月<input type="text" name="date-split-calc-end-day" class="date-split-calc-end-date-inputs date-split-calc-day-inputs" maxlength="2" size="3">日
+               &nbsp;<button id="date-split-calc-end-cancel-button">取消</button></p>
+               <div id="date-split-calc-error-disp-corner" class="error-disp-corners" style="display:none;"> 
+                  <h3>エラー</h3>
+                  <p id="date-split-calc-error-message" class="error-message-disps"></p>
+               </div>
+               <p><button id="date-split-calc-exe-button">計算</button>&nbsp;<button id="date-split-calc-reset-button">入力初期化</button>&nbsp;<button class="all-cancel-buttons" onclick="allInit();">全初期化</button></p>
+            </div>
+            <div id="date-split-calc-result-corner" style="display:none;" class="disp-corners">
+               <h3>分割計算結果</h3>
+               <p id="date-split-calc-date-disp-corner"><span id="date-split-calc-start-date"></span>と<span id="date-split-calc-end-date"></span>の日付間は,<span id="date-split-calc-between" class="emphasis-spans"></span>日ありました</p>
+               <table id="date-split-calc-result-table" align="center">
+                 <thead><tr><th>区間名</th><th>分数</th><th>区間開始日</th><th>区間終了日</th></tr></thead>
+                 <tbody></tbody>
+               </table>
+            </div>
+         </div>
+         <div id="age-n-times-date-calc-corner" style="display:none;">
+           <h2>n倍日付算出</h2>
+           <ul id="age-n-times-date-calc-explaination">
+              <li>ここでは入力した2つの日付のうち、早いほうの日付に生まれた人の年齢が,遅いほうの日付に生まれた人の年齢がちょうど〇倍になる日を算出します</li>
+              <li>以下の入力欄に何倍になる日を求めたいのかを入力してください。1以外の0より大きい数字なら、整数でなくとも小数でもかまいません</li>
+              <li>ただし,計算は日付単位なので(具体的な時刻は算出しません),計算時に出現した端数は四捨五入して日付を計算します。ゆえに,多少日付が前後する場合があります</li>
+              <li>通常は,「先に生まれた人の年齢が後に生まれた人の年齢のn(=1より大きい数)倍」になる日を計算しますが,1倍以下の数字が入力された場合,「<b>後</b>に生まれた人の年齢が<b>先</b>に生まれた人の年齢の0.*(=1以下の数)」になる日を計算します</li>
+              <li>例えば,0.5が入力された場合,「後に生まれた人の年齢が先に生まれた人の0.5倍」になる日を計算します。つまり,「先に生まれた人の年齢が先に生まれた人の年齢が2倍」になる日と同じなので,2が入力された場合と同じ結果になります。</li>
+              <li>なお,誕生日として設定できるのは明治6年(1873年)以降といたします。(明治以前は旧暦なので今の暦と異なるため)</li>
+           </ul>
+           <div id="age-n-times-date-calc-input-date-corner" class="disp-corners">
+               <p>何倍の日付を算出するか?:<input type="text" name="age-n-times-date-calc-times" maxlength="8" size="8">倍&nbsp;<button id="age-n-times-date-calc-times-cancel-button">取消</button></p>
+               <p>先に生まれた人の誕生日:西暦<input type="text" name="age-n-times-date-calc-start-year" class="age-n-times-date-calc-start-date-inputs age-n-times-date-calc-year-inputs" maxlength="4" size="5">年<input type="text" name="age-n-times-date-calc-start-month" class="age-n-times-date-calc-start-date-inputs age-n-times-date-calc-month-inputs" maxlength="2" size="3">月<input type="text" name="age-n-times-date-calc-start-day" class="age-n-times-date-calc-start-date-inputs age-n-times-date-calc-day-inputs" maxlength="2" size="3">日
+               &nbsp;<button id="age-n-times-date-calc-start-cancel-button">取消</button></p>
+               <p>後に生まれた人の誕生日:西暦<input type="text" name="age-n-times-date-calc-end-year" class="age-n-times-date-calc-end-date-inputs age-n-times-date-calc-year-inputs" maxlength="4" size="5">年<input type="text" name="age-n-times-date-calc-end-month" class="age-n-times-date-calc-end-date-inputs age-n-times-date-calc-month-inputs" maxlength="2" size="3">月<input type="text" name="age-n-times-date-calc-end-day" class="age-n-times-date-calc-end-date-inputs age-n-times-date-calc-day-inputs" maxlength="2" size="3">日
+               &nbsp;<button id="age-n-times-date-calc-end-cancel-button">取消</button></p>
+               <div id="age-n-times-date-calc-error-disp-corner" class="error-disp-corners" style="display:none;"> 
+                  <h3>エラー</h3>
+                  <p id="age-n-times-date-calc-error-message" class="error-message-disps"></p>
+               </div>
+               <p><button id="age-n-times-date-calc-exe-button">計算</button>&nbsp;<button id="age-n-times-date-calc-reset-button">入力初期化</button>&nbsp;<button class="all-cancel-buttons" onclick="allInit();">全初期化</button></p>
+           </div>
+           <div id="age-n-times-date-calc-result-corner" style="display:none;" class="disp-corners">
+             <h3>日付算出結果</h3>
+             <p id="age-n-times-date-calc-disp-corner"><span id="age-n-times-date-calc-older-birthday"></span>生まれの人と<span id="age-n-times-date-calc-younger-birthday"></span>生まれの人は<span id="age-n-times-date-calc-between"></span>差があります</p>
+             <p id="age-n-times-date-calc-result"><span id="age-n-times-date-calc-n-times"></span>,<span id="age-n-times-date-calc-result-date" class="emphasis-spans"></span>です</p>
+           </div>
+         </div>
+      </section>
+   
+   </main>
+   <footer><p><small>&copy;Daisuke&nbsp;Sato</small></p></footer>
+ </body>
+ <script type="text/javascript">
+     setData();
+   
+ </script>
+</html>
+           
+            
