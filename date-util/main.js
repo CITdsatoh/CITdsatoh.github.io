@@ -6,6 +6,8 @@ let currentOperationObj;
 const setData=(()=>{
    objs["date-split-calc"]=new DateSplitCalcCorner("date-split-calc");
    objs["age-n-times-date-calc"]=new AgeNTimesCalcCorner("age-n-times-date-calc");
+   objs["date-progress-rate-calc"]=new DateProgressRateCalcCorner("date-progress-rate-calc");
+   objs["date-age-rate-calc"]=new DateAgeRateCalcCorner("date-age-rate-calc");
    currentOperationObj=objs["date-split-calc"];
 });
 
