@@ -16,6 +16,8 @@ li{
 .explaination-example{
    list-style:none;
    text-indent:1em;
+   padding-top:5px;
+   padding-bottom:5px;
 }
 
 section{
@@ -49,6 +51,10 @@ section{
    font-weight:bold;
    font-size:16px;
 }
+.dummy-margin
+{
+   margin-bottom:30px;
+}
 
 
 table{
@@ -63,6 +69,7 @@ tr,th,td
    font-weight:bold;
    
 }
+
 .emphasis-spans
 {
    font-weight:bold;
