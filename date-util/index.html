@@ -23,12 +23,22 @@
            <li>2つ目の機能の「n倍日付算出」機能では,入力した2つの日付に生まれた人間が,後に生まれた人間が先に生まれた人間の〇倍の年齢になる日付はいつかを算出するものです
               <li class="explaination-example">使用例):親子の生年月日を入力して,親の年齢が子の年齢の3倍になる日付を算出するなど</li>
            </li>
+           <li>3つ目の機能の「日付経過率算出」機能では,入力した開始日で始まり,終了日で終わる期間のうち,それとは別に入力したある日付(=計算日)時点で,どのくらい経過したかの割合を求めるものです。
+              <li class="explaination-example">使用例):夏休みの開始日と終了日を入力して,それとは別に夏休みのある日をもう1つ入力し,その日までで,夏休み全体(=入力した開始日と終了日からなる期間)のうちどのくらいの割合が経過しているかを求めるなど</li>
+           </li>
+           <li>4つ目の機能の「入力日時点での年齢倍率計算」機能では,入力した2つの日付で生まれた人物の年齢が,それとは別に入力した日(=計算日)時点で、何倍になるのかを算出するものです
+              <li class="explaination-example">使用例):親子の生年月日を入力して,今日の時点で親の年齢が子の年齢の何倍になるかを算出するなど</li>
+           </li>
+           <li>各機能の使用方法などの詳しい説明は,以下のボタンで「機能選択」で使用したい機能を選択すると,日付入力欄と一緒に出現します</li>
+           <li>また本実行エンジンはJavaScript,つまりブラウザで実行しますので,誕生日等のデータはサーバーに送られることはありませんので安心してご利用ください</li>
          </ul>
       </section>
       <section id="func-choice-corner">
          <h2>機能選択</h2>
            <p><input type="radio" name="func-choice" value="date-split-calc" checked onclick="choiceChange(this);">区間分割日付算出&nbsp;
-           <input type="radio" name="func-choice" value="age-n-times-date-calc" onclick="choiceChange(this);">n倍日付算出
+           <input type="radio" name="func-choice" value="age-n-times-date-calc" onclick="choiceChange(this);">n倍日付算出<br>
+           <input type="radio" name="func-choice" value="date-progress-rate-calc" onclick="choiceChange(this);">日付の経過率算出&nbsp;
+           <input type="radio" name="func-choice" value="date-age-rate-calc" onclick="choiceChange(this);">入力日時点での年齢倍率計算
            </p>
       </section>
       <section id="main-calc-corner" style="margin-bottom:50px;">
@@ -91,6 +101,70 @@
              <p id="age-n-times-date-calc-result"><span id="age-n-times-date-calc-n-times"></span>,<span id="age-n-times-date-calc-result-date" class="emphasis-spans"></span>です</p>
            </div>
          </div>
+         <div id="date-progress-rate-calc-corner" style="display:none;">
+           <h2>日付経過率計算</h2>
+           <ul id="date-progress-rate-calc-explaination">
+             <li>ここでは、開始日と終了日と計算日の3つの日付を入力し,開始日と終了日の日付間のうち,開始日から計算日までの経過割合を計算します</li>
+             <li>つまり,「開始日から計算日の日数/開始日から終了日の日数」を百分率(小数点第三位まで)を計算します</li>
+             <li>そのため,必ず,入力は、日付の早いほうから、「開始日→計算日→終了日」という順で入力してください</li>
+             <li>なお,開始日も終了日も計算日も設定できるのは明治6年(1873年)以降といたします。(明治以前は旧暦なので今の暦と異なるため)</li>
+           </ul>
+           <div id="date-progress-rate-calc-input-date-corner" class="disp-corners">
+              <h5>区間の開始・終了日入力</h5>
+              <p>開始日:<input type="text" name="date-progress-rate-calc-start-year" class="date-progress-rate-calc-start-date-inputs date-progress-rate-calc-year-inputs" maxlength="4" size="4">年<input type="text" name="date-progress-rate-calc-start-month" class="date-progress-rate-calc-start-date-inputs date-progress-rate-calc-month-inputs" maxlength="2" size="2">月<input type="text" name="date-progress-rate-calc-start-day" class="date-progress-rate-calc-start-date-inputs date-progress-rate-calc-day-inputs" maxlength="2" size="2">日
+              &nbsp;<button id="date-progress-rate-calc-start-cancel-button">取消</button></p>
+              <p>終了日:<input type="text" name="date-progress-rate-calc-end-year" class="date-progress-rate-calc-end-date-inputs date-progress-rate-calc-year-inputs" maxlength="4" size="4">年<input type="text" name="date-progress-rate-calc-end-month" class="date-progress-rate-calc-end-date-inputs date-progress-rate-calc-month-inputs" maxlength="2" size="2">月<input type="text" name="date-progress-rate-calc-end-day" class="date-progress-rate-calc-end-date-inputs date-progress-rate-calc-day-inputs" maxlength="2" size="2">日
+              &nbsp;<button id="date-progress-rate-calc-end-cancel-button">取消</button></p>
+              <!-- 開始・終了日の入力欄と計算日の入力欄は別枠と考えられるので余白を少し入れる(誤って,開始日→終了日→計算日の順に入れないように) -->
+              <div class="dummy-margin"></div>
+              <h5>計算日(開始日より後,終了日より前)</h5>
+              <p>計算日:<input type="text" name="date-progress-rate-calc-target-year" class="date-progress-rate-calc-target-date-inputs date-progress-rate-calc-year-inputs" maxlength="4" size="4">年<input type="text" name="date-progress-rate-calc-target-month" class="date-progress-rate-calc-target-date-inputs date-progress-rate-calc-month-inputs" maxlength="2" size="2">月<input type="text" name="date-progress-rate-calc-target-day" class="date-progress-rate-calc-target-date-inputs date-progress-rate-calc-day-inputs" maxlength="2" size="2">日
+              &nbsp;<button id="date-progress-rate-calc-target-cancel-button">取消</button></p>
+              <p><button id="date-progress-rate-calc-exe-button">計算</button>&nbsp;<button id="date-progress-rate-calc-reset-button">入力初期化</button>&nbsp;<button class="all-cancel-buttons" onclick="allInit();">全初期化</button></p>
+              <div id="date-progress-rate-calc-error-disp-corner" class="error-disp-corners" style="display:none;">
+                 <h3>エラー</h3>
+                 <p id="date-progress-rate-calc-error-message" class="error-message-disps"></p>
+              </div>
+           </div>
+           <div id="date-progress-rate-calc-result-corner" style="display:none;" class="disp-corners">
+             <h3>経過率算出結果</h3>
+             <p id="date-progress-rate-calc-disp-corner"><span class="date-progress-rate-calc-start-date-disps"></span>と<span class="date-progress-rate-calc-end-date-disps"></span>の<span id="date-progress-rate-calc-between"></span>日間の区間のうち・・・</p>
+             <p id="date-progress-rate-calc-result"><span class="date-progress-rate-calc-start-date-disps"></span>から<span class="date-progress-rate-calc-end-date-disps"></span>までのうち,<span class="date-progress-rate-calc-target-date-disps"></span>までで<span id="date-progress-rate-calc-elapsed"></span>日間で,<span id="date-progress-rate-calc-rate-disp" class="emphasis-spans"></span>が経過しています</span></p>   
+           </div>
+         </div>
+         <div id="date-age-rate-calc-corner" style="display:none;">
+           <h2>入力日時点での年齢倍率計算</h2>
+           <ul id="date-age-rate-calc-explaination">
+             <li>ここでは,先に生まれた人の誕生日と後に生まれた人の誕生日を入力し,それとは別に入力した日付(計算日)時点での年齢倍率を計算します</li>
+             <li>つまり,入力した日付(計算日)時点での2人の年齢が何倍になるかを計算することができます。</li>
+             <li>ゆえに,必ず、日付が早い順に「先に生まれた人の誕生日→後に生まれた人の誕生日→計算日」という順になるよう入力してください</li>
+             <li>倍率表示は,「先に生まれた人の年齢の,後に生まれた人の年齢に対する」倍率(=1より大きい)と,「後に生まれた人の年齢の,先に生まれた人の年齢に対する」倍率(=1未満)の両方を小数点以下第三位まで表示します</li>
+             <li>なお,開始日も終了日も計算日も設定できるのは明治6年(1873年)以降といたします。(明治以前は旧暦なので今の暦と異なるため)</li>
+           </ul>
+           <div id="date-age-rate-calc-input-date-corner" class="disp-corners">
+              <h5>誕生日入力</h5>
+              <p>先に生まれた人の誕生日:<input type="text" name="date-age-rate-calc-start-year" class="date-age-rate-calc-start-date-inputs date-age-rate-calc-year-inputs" maxlength="4" size="4">年<input type="text" name="date-age-rate-calc-start-month" class="date-age-rate-calc-start-date-inputs date-age-rate-calc-month-inputs" maxlength="2" size="2">月<input type="text" name="date-age-rate-calc-start-day" class="date-age-rate-calc-start-date-inputs date-age-rate-calc-day-inputs" maxlength="2" size="2">日
+              &nbsp;<button id="date-age-rate-calc-start-cancel-button">取消</button></p>
+              <p>後に生まれた人の誕生日:<input type="text" name="date-age-rate-calc-end-year" class="date-age-rate-calc-end-date-inputs date-age-rate-calc-year-inputs" maxlength="4" size="4">年<input type="text" name="date-age-rate-calc-end-month" class="date-age-rate-calc-end-date-inputs date-age-rate-calc-month-inputs" maxlength="2" size="2">月<input type="text" name="date-age-rate-calc-end-day" class="date-age-rate-calc-end-date-inputs date-age-rate-calc-day-inputs" maxlength="2" size="2">日
+              &nbsp;<button id="date-age-rate-calc-end-cancel-button">取消</button></p>
+              <div class="dummy-margin"></div>
+              <h5>計算日(開始日と終了日の両方より後)</h5>
+              <p>計算日:<input type="text" name="date-age-rate-calc-target-year" class="date-age-rate-calc-target-date-inputs date-age-rate-calc-year-inputs" maxlength="4" size="4">年<input type="text" name="date-age-rate-calc-target-month" class="date-age-rate-calc-target-date-inputs date-age-rate-calc-month-inputs" maxlength="2" size="2">月<input type="text" name="date-age-rate-calc-target-day" class="date-age-rate-calc-target-date-inputs date-age-rate-calc-day-inputs" maxlength="2" size="2">日
+              &nbsp;<button id="date-age-rate-calc-target-cancel-button">取消</button>&nbsp;<button id="date-age-rate-calc-target-today-padding-button">今日の日付を設定</button></p>
+              <p><button id="date-age-rate-calc-exe-button">計算</button>&nbsp;<button id="date-age-rate-calc-reset-button">入力初期化</button>&nbsp;<button class="all-cancel-buttons" onclick="allInit();">全初期化</button></p>
+              <div id="date-age-rate-calc-error-disp-corner" class="error-disp-corners" style="display:none;">
+                 <h3>エラー</h3>
+                 <p id="date-age-rate-calc-error-message" class="error-message-disps"></p>
+              </div>
+           </div>
+           <div id="date-age-rate-calc-result-corner" class="disp-corners" style="display:none;">
+              <h3>年齢倍率計算結果</h3>
+              <p>先に生まれた人(<span id="date-age-rate-calc-older-birthday"></span>生まれ)と後に生まれた人(<span id="date-age-rate-calc-younger-birthday"></span>生まれ)は<span id="date-age-rate-calc-between"></span>日差があります</p>
+              <p><span class="date-age-rate-calc-target-date-disps"></span>時点での,<b>先</b>に生まれた人の年齢は<b>後</b>に生まれた人の年齢の<span id="date-age-rate-calc-result-old-base" class="emphasis-spans"></span>倍です</p>
+              <p>一方,<span class="date-age-rate-calc-target-date-disps"></span>時点での,<b>後</b>に生まれた人の年齢は<b>先</b>に生まれた人の年齢の<span id="date-age-rate-calc-result-young-base" class="emphasis-spans"></span>倍です</p>
+           </div>
+         </div>
+         
       </section>
    
    </main>
